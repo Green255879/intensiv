@@ -40,10 +40,18 @@ public abstract class BankAccount {
         this.accountHolder = accountHolder;
     }
 
-    // Абстрактный метод для снятия средств
+    /**
+     * Абстрактный метод для снятия средств
+     * @param amount - сумма для снятия
+     * @return сумма снятия
+     */
     public abstract BigDecimal withdraw(BigDecimal amount);
 
-    // Абстрактный метод для пополнения счета
+    /**
+     * Абстрактный метод для пополнения счета
+     * @param amount - сумма для снятия
+     * @return сумма снятия
+     */
     public void deposit(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) > 0)
             balance = balance.add(amount);

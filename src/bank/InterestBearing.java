@@ -1,6 +1,8 @@
 package bank;
 
-// Ежемесячное начисление процентов
+/**
+ * Ежемесячное начисление процентов
+ */
 public interface InterestBearing {
     void applyInterest();
 }
