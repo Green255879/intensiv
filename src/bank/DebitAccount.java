@@ -3,7 +3,7 @@ package bank;
 import java.math.BigDecimal;
 
 /**
- * Условие снятия при балансе большим запрашиваемой суммы
+ * Условие снятия при балансе >= запрашиваемой сумме
  */
 public class DebitAccount extends BankAccount {
 
@@ -21,7 +21,9 @@ public class DebitAccount extends BankAccount {
      */
     @Override
     public BigDecimal withdraw(BigDecimal amount) {
-        if (balance.compareTo(amount) >= 0) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0)
+            return BigDecimal.ZERO;
+        else if (balance.compareTo(amount) >= 0) {
             balance = balance.subtract(amount);
             return amount;
         }

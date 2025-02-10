@@ -8,6 +8,10 @@ import java.math.BigDecimal;
 public class CreditAccount extends BankAccount implements TransactionFee {
     private final BigDecimal creditLimit;
 
+    public BigDecimal getCreditLimit() {
+        return creditLimit;
+    }
+
     protected CreditAccount(long accountNumber, BigDecimal balance, String accountHolder, BigDecimal creditLimit) {
         super(accountNumber, balance, accountHolder);
         this.creditLimit = creditLimit;
@@ -26,6 +30,8 @@ public class CreditAccount extends BankAccount implements TransactionFee {
      */
     @Override
     public BigDecimal withdraw(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0)
+            return BigDecimal.ZERO;
         BigDecimal commission = applyFee(amount);
         BigDecimal amountPlusCommission = amount.add(commission);
         BigDecimal subtract = balance.subtract(amountPlusCommission);
@@ -80,6 +86,8 @@ public class CreditAccount extends BankAccount implements TransactionFee {
         }
 
         public CreditAccount build() {
+            if (this.creditLimit == null)
+                this.creditLimit = BigDecimal.valueOf(-5000);
             return new CreditAccount(accountNumber, balance, accountHolder, creditLimit);
         }
     }
